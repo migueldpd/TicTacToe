@@ -1,13 +1,22 @@
 let player = "X" || "O"; //Players
+let gameInProgress = true;
 
 function onClickCell(value){
-    if(document.getElementById("cell_" + value).textContent === ""){
+    if (gameInProgress && document.getElementById("cell_" + value).textContent === "") {
         checkPlayer(value);
-        isThereWinner();
-    }else{
-        alert("You cant play there");
+        const winner = isThereWinner();
+        if (winner) {
+            console.log("Winner : " + winner);
+            gameInProgress = false; // Set game state to false if there's a winner
+        } else {
+            console.log("No winner yet");
+        }
+        placeSound();
+    } else if (!gameInProgress) {
+        alert("The game is over. Please reset to play again.");
+    } else {
+        alert("You can't play there.");
     }
-
 }
 
 function checkPlayer(value){
@@ -19,6 +28,13 @@ function checkPlayer(value){
         cell.textContent = "O";
         player = "X";
     }
+    const winner = isThereWinner();
+    if(winner){
+        console.log("Winner : " + winner);
+    }
+    else
+        console.log("No winner yet");
+    placeSound();
 }
 
 function isThereWinner(){
@@ -28,22 +44,38 @@ function isThereWinner(){
         cells.push(document.getElementById("cell_" + i).innerText);
     }
 
-    //checking if someone won the game in each possible way
-    if(cells[0] === cells[1] && cells[1] === cells[2] && cells[0] != "" || //hor 1
-       cells[3] === cells[4] && cells[4] === cells[5] && cells[3] != "" || //hor2
-       cells[6] === cells[7] && cells[7] === cells[8] && cells[6] != "" || //hor3
-       cells[0] === cells[3] && cells[3] === cells[6] && cells[0] != "" || //ver1
-       cells[1] === cells[4] && cells[4] === cells[7] && cells[1] != "" || //ver2
-       cells[2] === cells[5] && cells[5] === cells[8] && cells[2] != "" || //ver3
-       cells[0] === cells[4] && cells[4] === cells[8] && cells[0] != "" || //dia1
-       cells[2] === cells[4] && cells[4] === cells[6] && cells[2] != "" ){ //dia2
-        alert("GAME IS OVER");
+    const possibleWins = [ 
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
+
+    for(const comb of possibleWins){
+        const [a,b,c] = comb;
+        if(cells[a] && cells[a] === cells[b] && cells[a] === cells[c]){
+            console.log("Ganhou na posicoes : " + a + "," + b + "," + c);
+            return cells[a];
+        }
     }
+    return null;
 }
 
-function resetGame(){
+function resetGame(){ //function that reset the board, and makes the X start the next game
     for(let i = 1; i <= 9; i++){
         document.getElementById("cell_" + i).innerText = "";
         player = "X";
     }
+    document.getElementById("hitmark").play();
 }
+
+function placeSound(){ //each time a player plays, a place sound sounds.
+    document.getElementById("place").play();
+
+}
+
+//TODO : SCORE TRACKING , BOARD SIZE , SOUND EFFECTS AND THEMES !!! 

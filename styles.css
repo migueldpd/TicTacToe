@@ -13,6 +13,11 @@
     border-bottom: 2px solid black;
 }
 
+.wonGame{
+    background-color: white;
+    color: black;
+}
+
 body{
     width: 100vw;
     height: 100vh;
