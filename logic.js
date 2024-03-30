@@ -1,5 +1,7 @@
 let player = "X" || "O"; //Players
 let gameInProgress = true;
+let winnerX = document.getElementById("resX");
+let winnerO = document.getElementById("resO");
 
 function onClickCell(value){
     if (gameInProgress && document.getElementById("cell_" + value).textContent === "") {
@@ -8,6 +10,14 @@ function onClickCell(value){
         if (winner) {
             console.log("Winner : " + winner);
             gameInProgress = false; // Set game state to false if there's a winner
+            if(winner === "X"){
+                let currentCountX = parseInt(winnerX.textContent);
+                winnerX.textContent = currentCountX+1;
+            }else{
+                let currentCountO = parseInt(winnerO.textContent);
+                winnerO.textContent = currentCountO+1;
+            }
+                
         } else {
             console.log("No winner yet");
         }
@@ -59,6 +69,12 @@ function isThereWinner(){
         const [a,b,c] = comb;
         if(cells[a] && cells[a] === cells[b] && cells[a] === cells[c]){
             console.log("Ganhou na posicoes : " + a + "," + b + "," + c);
+            let firstHouse = a+1;
+            let secondHouse = b+1;
+            let thirdHouse = c+1;
+            document.getElementById("cell_" + firstHouse).classList.add("wonGame");
+            document.getElementById("cell_" + secondHouse).classList.add("wonGame");
+            document.getElementById("cell_" + thirdHouse).classList.add("wonGame");
             return cells[a];
         }
     }
@@ -68,9 +84,12 @@ function isThereWinner(){
 function resetGame(){ //function that reset the board, and makes the X start the next game
     for(let i = 1; i <= 9; i++){
         document.getElementById("cell_" + i).innerText = "";
+        document.getElementById("cell_" + i).classList.remove("wonGame");
         player = "X";
     }
+    gameInProgress = true;
     document.getElementById("hitmark").play();
+
 }
 
 function placeSound(){ //each time a player plays, a place sound sounds.

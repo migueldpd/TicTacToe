@@ -27,6 +27,14 @@ body{
     align-items: center;
 }
 
+footer{
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 50;
+    padding-bottom: 40px;
+}
+
 table{
     width:30vw;
     height: 50vh;
