@@ -9,8 +9,11 @@
 <body>
     <audio id="hitmark" src="sounds/effect.mp3"></audio>
     <audio id="place" src="sounds/place.mp3"></audio>
-    <button class="resetGameButton" onclick="resetGame()">Reset</button>
-    <table>
+    <header>
+        <button class="resetGameButton" onclick="resetGame()">Reset Board</button>
+        <button class="resetGameButton" onclick="toggleTheme()">Toggle theme</button>
+    </header>
+    <table id="myTable">
         <tr>
             <td onclick="onClickCell(1)" id="cell_1"></td>
             <td onclick="onClickCell(2)" class="ver" id="cell_2"></td>
@@ -27,7 +30,7 @@
             <td onclick="onClickCell(9)" id="cell_9"></td>
         </tr>
     </table>
-    <footer>
+    <footer id="myFooter">
         <p>X : <span id="resX">0</span></p>
         <p>O : <span id="resO">0</span></p>
     </footer>

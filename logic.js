@@ -97,4 +97,29 @@ function placeSound(){ //each time a player plays, a place sound sounds.
 
 }
 
-//TODO : SCORE TRACKING , BOARD SIZE , SOUND EFFECTS AND THEMES !!! 
+function toggleTheme(){
+    const ver = document.getElementsByClassName("ver");
+    const hor = document.getElementsByClassName("hor");
+    //toggle dark to ver
+    for(let i = 0 ; i < ver.length ; i++){
+        ver[i].classList.toggle("ver-dark");
+    }
+    //toggle dark to hor
+    for(let i = 0 ; i < hor.length ; i++){
+        hor[i].classList.toggle("hor-dark");
+    }
+
+    document.body.classList.toggle("dark-theme");
+    const tdTable = document.getElementById("myTable");
+    const tdElements = tdTable.querySelectorAll("td");
+    tdElements.forEach(td=> {
+        td.classList.toggle("tdDark");
+    });
+
+    const foot = document.getElementById("myFooter");
+    foot.classList.toggle("footer-dark");
+}
+
+
+
+//TODO :BOARD SIZE AND THEMES !!! 
