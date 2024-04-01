@@ -109,7 +109,9 @@ function toggleTheme(){
         hor[i].classList.toggle("hor-dark");
     }
 
+    //add theme to body
     document.body.classList.toggle("dark-theme");
+
     const tdTable = document.getElementById("myTable");
     const tdElements = tdTable.querySelectorAll("td");
     tdElements.forEach(td=> {
@@ -118,6 +120,16 @@ function toggleTheme(){
 
     const foot = document.getElementById("myFooter");
     foot.classList.toggle("footer-dark");
+
+    const head = document.querySelector("header");
+    head.classList.toggle("header-dark");
+
+    const btns = document.querySelectorAll("button");
+    btns.forEach(bt=>{
+        bt.classList.toggle("btn-dark");
+    });
+
+    //check wonGame in theme
 }
 
 
