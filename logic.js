@@ -98,38 +98,21 @@ function placeSound(){ //each time a player plays, a place sound sounds.
 }
 
 function toggleTheme(){
-    const ver = document.getElementsByClassName("ver");
-    const hor = document.getElementsByClassName("hor");
-    //toggle dark to ver
-    for(let i = 0 ; i < ver.length ; i++){
-        ver[i].classList.toggle("ver-dark");
-    }
-    //toggle dark to hor
-    for(let i = 0 ; i < hor.length ; i++){
-        hor[i].classList.toggle("hor-dark");
-    }
+    let changeTheme = document.getElementById("mystyle");
+    let currentTheme = changeTheme.getAttribute("href");
 
-    //add theme to body
-    document.body.classList.toggle("dark-theme");
+    document.body.classList.add("theme-transition");
 
-    const tdTable = document.getElementById("myTable");
-    const tdElements = tdTable.querySelectorAll("td");
-    tdElements.forEach(td=> {
-        td.classList.toggle("tdDark");
-    });
+    setTimeout(() => {
+        if(currentTheme === "styles/style.css"){
+            changeTheme.href = "styles/dark.css";
+        }else{
+            changeTheme.href = "styles/style.css";
+        }
+        document.body.classList.remove("theme-transition");
+    }, 1000);
 
-    const foot = document.getElementById("myFooter");
-    foot.classList.toggle("footer-dark");
 
-    const head = document.querySelector("header");
-    head.classList.toggle("header-dark");
-
-    const btns = document.querySelectorAll("button");
-    btns.forEach(bt=>{
-        bt.classList.toggle("btn-dark");
-    });
-
-    //check wonGame in theme
 }
 
 
