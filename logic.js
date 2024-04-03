@@ -110,7 +110,7 @@ function toggleTheme(){
             changeTheme.href = "styles/style.css";
         }
         document.body.classList.remove("theme-transition");
-    }, 1000);
+    }, 400);
 
 
 }
